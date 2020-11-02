@@ -29,5 +29,6 @@ app.use( (error, req, res, next) =>{
 	res.json(response);
 });
 
+// TODO: implement winston logging
 
 module.exports = app;

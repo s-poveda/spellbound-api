@@ -1,6 +1,3 @@
-const PORT = process.env.PORT || 8000;
-const NODE_ENV = process.env.NODE_ENV || production;
-
 module.exports = {
 	PORT : process.PORT,
 	NODE_ENV: process.NODE_ENV,
