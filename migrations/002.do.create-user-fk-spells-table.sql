@@ -1,0 +1,2 @@
+ALTER TABLE spells
+ADD COLUMN user_id INTEGER;
