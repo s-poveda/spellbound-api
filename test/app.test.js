@@ -1,7 +1,8 @@
 const app = require('../src/app');
+const knex = require('knex');
 const basePath = '/api';
 
-describe('App', ()=>{
+describe('App', function(){
 	it('GET responds 200 at "/"', ()=>{
 		return supertest(app)
 			.get('/')
