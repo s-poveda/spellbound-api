@@ -1,6 +1,7 @@
 require('dotenv').config();
+const knex = require('knex');
 const app = require('./app.js');
-const { PORT } = require('./config');
+const { PORT, SPELLBOUND_ADMIN, SPELLBOUND_ADMIN_PWD } = require('./config');
 
 app.set('db', knex({
 	client: 'pg',
