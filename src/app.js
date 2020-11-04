@@ -6,7 +6,7 @@ const knex = require('knex');
 const SpellsRouter = require('./routes/spells.js');
 const {
 	NODE_ENV,
-	DB_URL,
+	DATABASE_URL,
 	SPELLBOUND_ADMIN,
 	SPELLBOUND_ADMIN_PWD
 } = require('./config');
@@ -17,15 +17,6 @@ const morganOptn = (NODE_ENV === 'production') ? 'tiny' : 'common';
 app.use(morgan(morganOptn));
 app.use(helmet());
 app.use(cors());
-
-app.set('db', knex({
-	client: 'pg',
-	connection: {
-		host: 'localhost',
-		user: SPELLBOUND_ADMIN,
-		password: SPELLBOUND_ADMIN_PWD
-	}
-}));
 
 const API_PATH = 'api';
 app.use(`/${API_PATH}/spells`, SpellsRouter);

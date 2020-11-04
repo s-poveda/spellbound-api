@@ -1,12 +1,15 @@
 const express = require('express');
-// const spellsService = require('./services/spellsService');
+const SpellsService = require('../services/SpellsService');
 
 const router = express.Router();
 
 router.route('/')
   // .all()
   .get((req, res, next) => {
-    res.send(200,'got all');
+    SpellsService.getAllSpells(req.app.get('db'))
+    .then( data =>{
+      res.json(data);
+    });
   })
   .post((req, res, next) => {
     res.send(201, 'posted spell');
