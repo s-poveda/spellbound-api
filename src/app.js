@@ -8,7 +8,8 @@ const {
 	NODE_ENV,
 	DATABASE_URL,
 	SPELLBOUND_ADMIN,
-	SPELLBOUND_ADMIN_PWD
+	SPELLBOUND_ADMIN_PWD,
+	API_PATH
 } = require('./config');
 
 const app = express();
@@ -16,12 +17,12 @@ const morganOptn = (NODE_ENV === 'production') ? 'tiny' : 'common';
 
 app.use(morgan(morganOptn));
 app.use(helmet());
-app.use(cors());
+app.use(cors(/* env var white*/));
 
-const API_PATH = 'api';
 app.use(`/${API_PATH}/spells`, SpellsRouter);
 
-// routes ::::::::
+// routes ::::::::::::::::
+
 app.get('/', (req, res)=>{
 	res.status(200).end();
 });
