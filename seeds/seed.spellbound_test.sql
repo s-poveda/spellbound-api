@@ -1,5 +1,3 @@
-TRUNCATE users, spells RESTART IDENTITY CASCADE;
-
 INSERT INTO users (username, password)
 VALUES
 ('TheLegend27', 'testpwd001'),
