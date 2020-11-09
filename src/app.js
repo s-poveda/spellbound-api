@@ -19,9 +19,11 @@ app.use(morgan(morganOptn));
 app.use(helmet());
 app.use(cors(/* env var white*/));
 
-app.use(`/${API_PATH}/spells`, SpellsRouter);
-
+console.log(`${API_PATH}/spells`);
 // routes ::::::::::::::::
+app.use(`${API_PATH}/spells`, SpellsRouter);
+
+// app.use(`/${API_PATH}/users`, UsersRouter);
 
 app.get('/', (req, res)=>{
 	res.status(200).end();

@@ -8,7 +8,8 @@ app.set('db', knex({
 	connection: {
 		host: 'localhost',
 		user: SPELLBOUND_ADMIN,
-		password: SPELLBOUND_ADMIN_PWD
+		password: SPELLBOUND_ADMIN_PWD,
+		database: 'spellbound',
 	}
 }));
 

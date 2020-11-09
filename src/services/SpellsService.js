@@ -4,6 +4,7 @@ const SpellsService = {
   getAllSpells(db) {
     return db('spells')
       .select()
+			.limit(15);
   },
   getSpell(db, id) {
 		return db('spells')
