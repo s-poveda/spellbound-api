@@ -3,6 +3,8 @@ const SpellsService = require('../services/SpellsService');
 const xss = require('xss');
 const SpellsRouter = express.Router();
 
+
+// TODO: make this part of the service
 function serializeSpell(spell) {
 	return {
 		user_id: spell.id,
