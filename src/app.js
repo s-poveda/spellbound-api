@@ -4,6 +4,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const knex = require('knex');
 const SpellsRouter = require('./routes/spells.js');
+const authRouter = require('./routes/authRouter');
 const {
 	NODE_ENV,
 	DATABASE_URL,
@@ -19,8 +20,8 @@ app.use(morgan(morganOptn));
 app.use(helmet());
 app.use(cors(/* env var white*/));
 
-console.log(`${API_PATH}/spells`);
 // routes ::::::::::::::::
+app.use(`${API_PATH}/auth`, authRouter);
 app.use(`${API_PATH}/spells`, SpellsRouter);
 
 // app.use(`/${API_PATH}/users`, UsersRouter);
