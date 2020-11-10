@@ -8,8 +8,10 @@ const AuthService = {
 			.where({ username })
 			.first();
 	},
-	comparePwdToHash(password, hash) {
-		return bcrypt.compare(password, hash);
+	async insertNewUser(db, username, password) {
+		const passwordHash = await this.hashPassword(password);
+		return db('users')
+			.insert([{username, password:passwordHash}]);
 	},
 	createJwt(subject, payload) {
 		return jwt.sign(payload, JWT_KEY, {
@@ -20,6 +22,12 @@ const AuthService = {
 	},
 	verifyJwt(token) {
 		return jwt.verify(tokeN, JWT_KEY, { algorithms: ['HS256'] });
+	},
+	comparePwdToHash(password, hash) {
+		return bcrypt.compare(password, hash);
+	},
+	hashPassword(password) {
+		return bcrypt.hash(password, 12);
 	},
 };
 
