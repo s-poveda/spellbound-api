@@ -40,7 +40,7 @@ app.use( (error, req, res, next) =>{
 		console.log(error);
 		response = { error, message : error.message };
 	}
-	res.json(response);
+	res.status(500).json(response);
 });
 
 // TODO: implement winston logging
