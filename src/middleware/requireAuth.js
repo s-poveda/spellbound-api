@@ -15,3 +15,5 @@ function requireAuth(req, res, next) {
 		res.status(401).json({ error: 'Unauthorized request' });
 	}
 }
+
+module.exports = requireAuth;
