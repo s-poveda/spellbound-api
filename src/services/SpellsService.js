@@ -1,10 +1,11 @@
 // TODO: rework into an instance of class service
 
 const SpellsService = {
-  getAllSpells(db) {
+  getAllSpells(db, offset = 0) {
     return db('spells')
       .select()
-			.limit(15);
+			.limit(20)
+			.offset(offset);
   },
   getSpell(db, id) {
 		return db('spells')

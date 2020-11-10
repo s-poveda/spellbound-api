@@ -23,8 +23,8 @@ app.use(cors(/* env var white*/));
 // routes ::::::::::::::::
 app.use(`${API_PATH}/auth`, authRouter);
 app.use(`${API_PATH}/spells`, SpellsRouter);
-
 // app.use(`/${API_PATH}/users`, UsersRouter);
+
 
 app.get('/', (req, res)=>{
 	res.status(200).end();

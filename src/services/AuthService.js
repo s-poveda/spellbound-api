@@ -10,8 +10,7 @@ const AuthService = {
 	},
 	async insertNewUser(db, username, password) {
 		const passwordHash = await this.hashPassword(password);
-		return db('users')
-			.insert([{username, password:passwordHash}]);
+		return db('users').insert([{ username, password: passwordHash }]);
 	},
 	createJwt(subject, payload) {
 		return jwt.sign(payload, JWT_KEY, {
