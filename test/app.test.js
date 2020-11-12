@@ -1,8 +1,8 @@
-const app = require('../src/app');
 const knex = require('knex');
+const app = require('../src/app');
 const SpellsService = require('../src/services/SpellsService');
 const { makeTestSpells } = require('./spells.fixture.js');
-const basePath = '/api';
+const { API_PATH } = process.env;
 
 describe('App', function(){
 	let db = null;
@@ -13,13 +13,6 @@ describe('App', function(){
 		});
 		app.set('db', db);
 	});
-
-	it('GET responds 200 at "/"', ()=>{
-		return supertest(app)
-			.get('/')
-			.expect(200)
-			});
-
 			describe('"/spells" endpoint', ()=> {
 				context('with spells inserted', ()=>{
 
@@ -28,7 +21,7 @@ describe('App', function(){
 
 					it("GET should return every spell", () => {
 						return supertest(app)
-							.get(`${basePath}/spells`)
+							.get(`${API_PATH}/spells`)
 							.expect(200)
 							.then((res) => {
 								return db('spells')

@@ -3,8 +3,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const knex = require('knex');
-const SpellsRouter = require('./routes/spells.js');
-const authRouter = require('./routes/authRouter');
+const UsersRouter = require('./routes/users')
 const {
 	NODE_ENV,
 	DATABASE_URL,
@@ -19,17 +18,12 @@ const morganOptn = (NODE_ENV === 'production') ? 'tiny' : 'common';
 app.use(morgan(morganOptn));
 app.use(helmet());
 app.use(cors(/* env var white*/));
-
 // routes ::::::::::::::::
-app.use(`${API_PATH}/auth`, authRouter);
-app.use(`${API_PATH}/spells`, SpellsRouter);
-// app.use(`/${API_PATH}/users`, UsersRouter);
+app.use( (req,res,next)=>{console.log(req.path); next()} )
 
-
-app.get('/', (req, res)=>{
-	res.status(200).end();
-});
-
+app.use(`${API_PATH}/users`, UsersRouter);
+app.use(`${API_PATH}/auth`, require('./routes/auth'));
+app.use(`${API_PATH}/spells`, require('./routes/spells'));
 
 //generic error handler
 app.use( (error, req, res, next) =>{

@@ -11,11 +11,11 @@ authRouter.route('/login').post(jsonBodyParser, async (req, res, next) => {
 			req.app.get('db'),
 			username
 		);
-		if (!dbUserData) return res.send({ error: 'Invalid username and password combination.' });
+		if (!dbUserData) return res.status(401).send({ error: 'Invalid username and password combination.' });
 
 		const pwdMatch = await AuthService.comparePwdToHash(password, dbUserData.password);
-		if(!pwdMatch) return res.send({ error: 'Invalid username and password combination.' });
-		const payload = { user_id: dbUserData };
+		if(!pwdMatch) return res.status(401).send({ error: 'Invalid username and password combination.' });
+		const payload = { user_id: dbUserData.id };
 
 		res.json({
 			authToken: AuthService.createJwt(username, payload),
