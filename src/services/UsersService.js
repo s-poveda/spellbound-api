@@ -20,6 +20,12 @@ const UsersService = {
 			.limit(limit)
 			.offset(offset);
   },
+	getUserDetails(db, username) {
+		return db('users')
+			.select('username', 'id')
+			.where({ username })
+			.first();
+	}
 }
 
 module.exports = UsersService;
