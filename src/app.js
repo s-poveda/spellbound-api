@@ -19,7 +19,6 @@ app.use(morgan(morganOptn));
 app.use(helmet());
 app.use(cors(/* env var white*/));
 // routes ::::::::::::::::
-app.use( (req,res,next)=>{console.log(req.path); next()} )
 
 app.use(`${API_PATH}/users`, UsersRouter);
 app.use(`${API_PATH}/auth`, require('./routes/auth'));

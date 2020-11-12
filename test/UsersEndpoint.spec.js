@@ -41,7 +41,7 @@ describe('/users endpoint', function () {
 		});
 
 		it('should return 200 with non-standard chars', async () => {
-			const nonexistingUsername = 'TheLegend27';
+			const nonexistingUsername = 'thisdoesntexist';
 			const res = await supertest(app)
 				.get(`${API_PATH}/users/${nonexistingUsername}`)
 				.expect(200);
@@ -62,7 +62,8 @@ describe('/users endpoint', function () {
 				)
 				.join('users AS u', 's.user_id', 'u.id')
 				.where({ username: nonexistingUsername });
-			expect(res.body).to.eql(dbData);
+			expect(res.body).to.be.empty;
+			expect(dbData).to.be.empty;
 		});
 	});
 

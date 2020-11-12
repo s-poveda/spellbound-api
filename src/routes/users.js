@@ -11,7 +11,7 @@ usersRouter.route('/')
 
 usersRouter.route('/:username')
 	.get(async (req, res, next) => {
-		const username = req.params;
+		const { username } = req.params;
 		try {
 			const data = await UsersService.getSpellsByUsername(
 				req.app.get('db'),
