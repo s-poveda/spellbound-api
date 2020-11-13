@@ -12,7 +12,6 @@ authRouter.route('/login').post(jsonBodyParser, async (req, res, next) => {
 			username
 		);
 		if (!dbUserData) return res.status(401).send({ error: 'Invalid username and password combination.' });
-
 		const pwdMatch = await AuthService.comparePwdToHash(password, dbUserData.password);
 		if(!pwdMatch) return res.status(401).send({ error: 'Invalid username and password combination.' });
 		const payload = { user_id: dbUserData.id };
@@ -21,7 +20,7 @@ authRouter.route('/login').post(jsonBodyParser, async (req, res, next) => {
 			authToken: AuthService.createJwt(username, payload),
 		});
 	} catch (e) {
-		next(e, req, res, next);
+		next(e);
 	}
 });
 
@@ -40,9 +39,8 @@ authRouter.route('/signup').post(jsonBodyParser, async (req, res, next) => {
 			username,
 			password
 		);
-		res.sendStatus(204);
+		res.sendStatus(201);
 	} catch (e) {
-
 		next(e);
 	}
 });
