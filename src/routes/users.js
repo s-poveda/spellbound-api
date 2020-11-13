@@ -5,7 +5,7 @@ const usersRouter = express.Router();
 const jsonBodyParser = express.json();
 
 usersRouter.route('/:username')
-	.get(async (req, res, next) => {
+	.get((req, res, next) => {
 		const { username } = req.params;
 		Promise.all([
 			UsersService.getSpellsByUsername(req.app.get('db'), username),
