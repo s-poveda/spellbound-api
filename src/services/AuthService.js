@@ -20,7 +20,10 @@ const AuthService = {
 		});
 	},
 	verifyJwt(token) {
-		return jwt.verify(tokeN, JWT_KEY, { algorithms: ['HS256'] });
+		return jwt.verify(token, JWT_KEY, { algorithms: ['HS256'] });
+	},
+	getPayload(token) {
+		return JSON.parse(Buffer.from(token.split('.')[1], 'base64'));
 	},
 	comparePwdToHash(password, hash) {
 		return bcrypt.compare(password, hash);
