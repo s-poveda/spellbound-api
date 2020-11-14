@@ -8,15 +8,19 @@ function requireAuth(req, res, next) {
 	} else {
 		bearerToken = authToken.slice(7, authToken.length);
 	}
-	Promise.all([
-		AuthService.verifyJwt(bearerToken),
-		AuthService.getPayload(bearerToken),
-	])
-	.then(([verified, payload]) => {
-		req.__JWT_PAYLOAD = payload;
-		next();
-	})
-	.catch( _ => res.status(401).json({ error: 'Unauthorized request' }));
+	try {
+		Promise.all([
+			AuthService.verifyJwt(bearerToken),
+			AuthService.getPayload(bearerToken),
+		])
+		.then(([verified, payload]) => {
+			req.__JWT_PAYLOAD = payload;
+			console.log('someoinh');
+			next();
+		});
+	} catch (e){
+		res.status(401).json({ error: 'Unauthorized request' });
+	}
 }
 
 module.exports = requireAuth;

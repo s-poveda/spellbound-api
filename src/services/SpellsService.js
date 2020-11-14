@@ -1,10 +1,24 @@
 // TODO: rework into an instance of class service
 
 const SpellsService = {
-  getAllSpells(db, offset = 0) {
-    return db('spells')
-      .select()
-			.limit(20)
+  getAllSpells(db, offset = 0, limit = 20) {
+    return db('spells AS s')
+      .select(
+				's.id',
+				's.title',
+				's.description',
+				's.date_created',
+				db.raw(
+					`json_strip_nulls(
+						json_build_object(
+							'id', u.id,
+							'username', u.username
+						)
+					) AS "author"`
+				)
+			)
+			.join('users AS u', 's.user_id', 'u.id')
+			.limit(limit)
 			.offset(offset);
   },
   getSpell(db, id) {

@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { JWT_KEY } = require('../config');
+const { JWT_KEY, JWT_TIMEOUT } = require('../config');
 const AuthService = {
 	getUserByUsername(db, username) {
 		return db('users')
@@ -15,7 +15,7 @@ const AuthService = {
 	createJwt(subject, payload) {
 		return jwt.sign(payload, JWT_KEY, {
 			subject,
-			expiresIn: '1h',
+			expiresIn: JWT_TIMEOUT,
 			algorithm: 'HS256',
 		});
 	},

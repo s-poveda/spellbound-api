@@ -7,6 +7,7 @@ module.exports = {
 	SPELLBOUND_ADMIN_PWD: process.env.SPELLBOUND_ADMIN_PWD || '',
 	API_PATH: process.env.API_PATH,
 	JWT_KEY: process.env.JWT_KEY,
+	JWT_TIMEOUT: process.env.JWT_TIMEOUT || '20s',
 }
 
 // TODO: remove test url export in production
