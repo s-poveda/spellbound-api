@@ -15,7 +15,6 @@ function requireAuth(req, res, next) {
 		])
 		.then(([verified, payload]) => {
 			req.__JWT_PAYLOAD = payload;
-			console.log('someoinh');
 			next();
 		});
 	} catch (e){
