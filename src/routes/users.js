@@ -11,7 +11,7 @@ usersRouter.route('/:username')
 			UsersService.getSpellsByUsername(req.app.get('db'), username),
 			UsersService.getUserDetails(req.app.get('db'), username),
 		])
-		.then(([userSpells, userDetails]) => {
+		.then(([userSpells, userDetails = [] ]) => {
 			res.json({ spells: userSpells, userDetails });
 		})
 		.catch(next);

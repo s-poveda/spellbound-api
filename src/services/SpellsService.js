@@ -55,7 +55,7 @@ const SpellsService = {
 			.returning('*');
   },
   updateSpell(db, id, newSpellinfo) {
-
+		// TODO: make patch endpoint
   }
 }
 
