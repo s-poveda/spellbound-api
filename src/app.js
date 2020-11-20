@@ -9,7 +9,8 @@ const {
 	DATABASE_URL,
 	SPELLBOUND_ADMIN,
 	SPELLBOUND_ADMIN_PWD,
-	API_PATH
+	API_PATH,
+	CLIENT_ORIGIN
 } = require('./config');
 
 const app = express();
@@ -17,7 +18,9 @@ const morganOptn = (NODE_ENV === 'production') ? 'tiny' : 'common';
 
 app.use(morgan(morganOptn));
 app.use(helmet());
-app.use(cors(/* env var white*/));
+app.use(cors({
+	origin: CLIENT_ORIGIN
+}));
 // routes ::::::::::::::::
 
 app.use(`${API_PATH}/users`, UsersRouter);

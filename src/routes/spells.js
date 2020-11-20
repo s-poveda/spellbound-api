@@ -9,6 +9,7 @@ const jsonBodyParser = express.json();
 function serializeSpell(spell, user_id) {
 	user_id = Number(user_id);
 	if (!user_id || typeof user_id !== 'number') throw new Error('Invalid data received.');
+	if (spell.title.length === 0 || spell.description.length === 0) throw new Error('A title and description must be provided.');
 	return {
 		user_id,
 		title: xss(spell.title),
@@ -34,13 +35,13 @@ SpellsRouter.route('/')
 		 try {
 			 newSpell = serializeSpell( req.body, user_id);
 		 } catch (e) {
-			 res.status(400).json({ message: e.message })
+			 return res.status(400).json({ message: e.message })
 		 }
 		 await SpellsService.insertSpell(
 			 req.app.get('db'),
 			 newSpell
 		 );
-		 res.sendStatus(201);
+		 res.status(201).json({});
 	 } catch (e) {
 		 next(e);
 	 }

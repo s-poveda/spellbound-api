@@ -16,7 +16,7 @@ describe('App', function() {
 		app.set('db', db);
 	});
 
-	before('truncate spells and users', async () => {
+	before('truncate spells and users. Inserting test users', async () => {
 		await db.raw(`
 			TRUNCATE spells, users RESTART IDENTITY CASCADE;
 			`);
@@ -103,7 +103,7 @@ describe('App', function() {
 				.expect(401);
 		});
 
-		it(``, async () => {
+		it(`returns 201 when when a new is added successfully`, async () => {
 			const authToken = await jwt.sign({user_id: 1}, JWT_KEY, {
 				algorithm: 'HS256',
 			});

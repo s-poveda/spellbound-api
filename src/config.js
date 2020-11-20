@@ -8,4 +8,5 @@ module.exports = {
 	API_PATH: process.env.API_PATH,
 	JWT_KEY: process.env.JWT_KEY,
 	JWT_TIMEOUT: process.env.JWT_TIMEOUT || '20s',
+	CLIENT_ORIGIN: process.env.CLIENT_ORIGIN || 'localhost:3000'
 }
