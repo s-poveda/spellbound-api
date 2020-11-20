@@ -39,6 +39,4 @@ app.use( (error, req, res, next) =>{
 	res.status(500).json(response);
 });
 
-// TODO: implement winston logging
-
 module.exports = app;

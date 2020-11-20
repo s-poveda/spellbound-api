@@ -1,7 +1,5 @@
-// TODO: rework into an instance of class service
-
-// FIXME: find a way to not repeat the structure explicitly
-
+// When a spells is requested, it has a reference to the author in the author object.
+// This is the case whether 
 const SpellsService = {
   getAllSpells(db, offset = 0, limit = 20) {
     return db('spells AS s')
@@ -54,9 +52,6 @@ const SpellsService = {
 			.where({ id })
 			.returning('*');
   },
-  updateSpell(db, id, newSpellinfo) {
-		// TODO: make patch endpoint
-  }
 }
 
 module.exports = SpellsService;

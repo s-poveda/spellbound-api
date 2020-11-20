@@ -28,9 +28,10 @@ authRouter.route('/login').post(jsonBodyParser, async (req, res, next) => {
 
 authRouter.route('/signup').post(jsonBodyParser, async (req, res, next) => {
 	try {
+		//regex checks for at least one number, uppercase, lowercase, and special character
 		const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/
 		let { username, password } = req.body;
-		//sanitize usrname before doing anything with them
+		//sanitize usrname before doing anything with it
 		username = xss(username);
 		const dbUserData = await AuthService.getUserByUsername(
 			req.app.get('db'),
@@ -52,15 +53,6 @@ authRouter.route('/signup').post(jsonBodyParser, async (req, res, next) => {
 	} catch (e) {
 		next(e);
 	}
-});
-
-authRouter.route('/refresh').
-get( async (req, res, next)=> {
-	const { sub, user_id } = req.__JWT_PAYLOAD;
-	const payload = { user_id };
-	res.json({
-		authToken: AuthService.createJwt(username, payload),
-	});
 });
 
 module.exports = authRouter;

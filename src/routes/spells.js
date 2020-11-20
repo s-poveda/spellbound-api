@@ -5,7 +5,7 @@ const requireAuth = require('../middleware/requireAuth');
 const SpellsRouter = express.Router();
 
 const jsonBodyParser = express.json();
-// TODO: make this part of the service
+
 function serializeSpell(spell, user_id) {
 	user_id = Number(user_id);
 	if (!user_id || typeof user_id !== 'number') throw new Error('Invalid data received.');
@@ -14,8 +14,6 @@ function serializeSpell(spell, user_id) {
 		user_id,
 		title: xss(spell.title),
 		description: xss(spell.description),
-		// damageTypes: ['array of suggested types?'],
-		// IDEA: maybe use tags: [] to filter?
 	};
 }
 

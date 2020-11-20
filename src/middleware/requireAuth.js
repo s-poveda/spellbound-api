@@ -13,7 +13,8 @@ function requireAuth(req, res, next) {
 			AuthService.verifyJwt(bearerToken),
 			AuthService.getPayload(bearerToken),
 		])
-		.then(([verified, payload]) => {
+		//verifyJwt will throw if not successful
+		.then(([ _, payload]) => {
 			req.__JWT_PAYLOAD = payload;
 			next();
 		});
