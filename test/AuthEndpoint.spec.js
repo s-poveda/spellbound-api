@@ -54,7 +54,7 @@ describe('/auth endpoint', function() {
 			const invalidUserObjects = [
 				{
 					username: '',
-					password: 'ValidP4ssW0rd!' //valid? yes. Strong? No.
+					password: 'ValidP4ssW0rd!', //valid? yes. Strong? No.
 				},
 				{
 					username: 'valid username',
@@ -77,7 +77,7 @@ describe('/auth endpoint', function() {
 					password: '987651432165',
 				},
 			];
-			invalidUserObjects.forEach( ({username, password}) =>{
+			invalidUserObjects.forEach(({ username, password }) => {
 				it(`returns 400 if invalid data is passed`, async () => {
 					await supertest(app)
 						.post(`${API_PATH}/auth/signup`)
@@ -87,12 +87,14 @@ describe('/auth endpoint', function() {
 						})
 						.expect(400);
 				});
- 			});
+			});
 
-			it(`return 201 when a new user signs up successfully`, async () =>{
+			it(`return 201 when a new user signs up successfully`, async () => {
 				const { username, password } = usersFixture.makeNewUser();
 				console.log(username, password);
-				const dbBefore = await db('users').select().where({ username });
+				const dbBefore = await db('users')
+					.select()
+					.where({ username });
 				await supertest(app)
 					.post(`${API_PATH}/auth/signup`)
 					.send({
@@ -100,11 +102,13 @@ describe('/auth endpoint', function() {
 						password,
 					})
 					.expect(204);
-				const dbData = await db('users').select().where({ username }).first();
+				const dbData = await db('users')
+					.select()
+					.where({ username })
+					.first();
 				expect(dbBefore).to.be.empty;
 				expect(dbData).to.have.all.keys(['id', 'username', 'password']);
 			});
-
 		});
 	});
 });
