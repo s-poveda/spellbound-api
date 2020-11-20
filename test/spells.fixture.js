@@ -18,4 +18,10 @@ module.exports = {
 			},
 		];
 	},
+	makeNewSpell() {
+		return {
+			title: 'new spell title',
+			description: 'a new spell added',
+		};
+	},
 };
